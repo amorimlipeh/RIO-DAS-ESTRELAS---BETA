@@ -1,0 +1,20 @@
+{
+  "name": "SISTEMA DE ESTOQUE ✨ RIO DAS ESTRELAS 🌟",
+  "short_name": "Rio das Estrelas",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#13255e",
+  "theme_color": "#13255e",
+  "icons": [
+    {
+      "src": "/assets/img/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
