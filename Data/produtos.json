@@ -1,0 +1,30 @@
+[
+  {
+    "id": "PRO-1",
+    "codigo": "IMA01G",
+    "nome": "Produto Teste Verde",
+    "material": "Material A",
+    "categoria": "Teste",
+    "unidade": "UN",
+    "codigoBarras": "789000000001",
+    "imagem": "",
+    "estoqueMinimo": 5,
+    "observacao": "",
+    "status": "ativo",
+    "criadoEm": "2026-03-11T00:00:00.000Z"
+  },
+  {
+    "id": "PRO-2",
+    "codigo": "PDF02P",
+    "nome": "Produto Teste P",
+    "material": "Material B",
+    "categoria": "Teste",
+    "unidade": "UN",
+    "codigoBarras": "789000000002",
+    "imagem": "",
+    "estoqueMinimo": 3,
+    "observacao": "",
+    "status": "ativo",
+    "criadoEm": "2026-03-11T00:00:00.000Z"
+  }
+]

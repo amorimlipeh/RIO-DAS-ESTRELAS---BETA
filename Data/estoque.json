@@ -1,0 +1,22 @@
+[
+  {
+    "id": "MOV-1",
+    "produtoCodigo": "IMA01G",
+    "endereco": "05-003-2",
+    "tipo": "entrada",
+    "quantidade": 120,
+    "usuario": "admin",
+    "motivo": "Carga inicial",
+    "dataHora": "2026-03-11T00:00:00.000Z"
+  },
+  {
+    "id": "MOV-2",
+    "produtoCodigo": "PDF02P",
+    "endereco": "04-001-1",
+    "tipo": "entrada",
+    "quantidade": 30,
+    "usuario": "admin",
+    "motivo": "Carga inicial",
+    "dataHora": "2026-03-11T00:00:00.000Z"
+  }
+]

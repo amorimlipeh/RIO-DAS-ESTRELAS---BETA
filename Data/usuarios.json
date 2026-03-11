@@ -1,0 +1,18 @@
+[
+  {
+    "id": "USR-1",
+    "usuario": "admin",
+    "senha": "123456",
+    "nome": "Administrador",
+    "perfil": "administrador",
+    "ativo": true
+  },
+  {
+    "id": "USR-2",
+    "usuario": "operador",
+    "senha": "123456",
+    "nome": "Operador",
+    "perfil": "operador",
+    "ativo": true
+  }
+]

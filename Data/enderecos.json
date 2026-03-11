@@ -1,0 +1,32 @@
+[
+  {
+    "id": "END-1",
+    "endereco": "05-003-2",
+    "rua": "05",
+    "posicao": "003",
+    "andar": "2",
+    "status": "ocupado",
+    "produtoCodigo": "IMA01G",
+    "quantidade": 120
+  },
+  {
+    "id": "END-2",
+    "endereco": "04-001-1",
+    "rua": "04",
+    "posicao": "001",
+    "andar": "1",
+    "status": "ocupado",
+    "produtoCodigo": "PDF02P",
+    "quantidade": 30
+  },
+  {
+    "id": "END-3",
+    "endereco": "01-001-1",
+    "rua": "01",
+    "posicao": "001",
+    "andar": "1",
+    "status": "bloqueado",
+    "produtoCodigo": "",
+    "quantidade": 0
+  }
+]
