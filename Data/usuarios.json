@@ -1,7 +1,4 @@
 [
-  {
-    "usuario": "admin",
-    "senha": "admin123",
-    "tipo": "admin"
-  }
+  {"id":1,"nome":"Administrador","usuario":"admin","senha":"admin123","tipo":"Administrador"},
+  {"id":2,"nome":"Operador 1","usuario":"operador","senha":"1234","tipo":"Operador"}
 ]
