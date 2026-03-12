@@ -152,11 +152,14 @@ senha:senha
 
 const dados = await resposta.json()
 
-if(dados.ok){
+if (dados.ok) {
 
-alert("Login realizado com sucesso")
+  alert("Login realizado com sucesso")
 
-window.location.href="/app"
+  // redireciona para o painel
+  window.location.href = "/app"
+
+}
 
 }else{
 
