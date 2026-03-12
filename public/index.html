@@ -3,104 +3,125 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sistema de Estoque ✨ Rio das Estrelas 🌟</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Projeto Rio das Estrelas V11</title>
+  <link rel="manifest" href="/pwa/manifest.json" />
+  <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
-  <header class="topbar">
-    <button id="menuBtn" class="icon-btn" aria-label="Abrir menu">☰</button>
-    <div class="brand">
-      <div class="brand-title">SISTEMA DE ESTOQUE ✨</div>
-      <div class="brand-sub">RIO DAS ESTRELAS 🌟</div>
+  <div id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <h1>Projeto Rio das Estrelas</h1>
+      <p>WMS + Estoque • V11 Final</p>
+      <form id="loginForm">
+        <input name="usuario" placeholder="Usuário" value="admin" required />
+        <input name="senha" type="password" placeholder="Senha" value="admin123" required />
+        <button type="submit">Acessar conta</button>
+      </form>
+      <small>Usuário teste: admin / admin123</small>
+      <div id="loginMsg"></div>
     </div>
-  </header>
+  </div>
 
-  <aside id="drawer" class="drawer">
-    <div class="drawer-head">
-      <span>Menu</span>
-      <button id="closeDrawer" class="icon-btn" aria-label="Fechar menu">✕</button>
-    </div>
-    <nav class="drawer-nav">
-      <button data-page="dashboard">Dashboard</button>
-      <button data-page="produtos">Produtos</button>
-      <button data-page="estoque">Estoque</button>
-      <button data-page="enderecos">Endereços</button>
-      <button data-page="pedidos">Pedidos</button>
-      <button data-page="recebimento">Recebimento</button>
-      <button data-page="inventario">Inventário</button>
-      <button data-page="notificacoes">Notificações</button>
-      <button data-page="configuracoes">Configurações</button>
+  <div id="app" class="app hidden">
+    <header class="topbar">
+      <div>
+        <h2>Projeto Rio das Estrelas</h2>
+        <span id="userLabel">Usuário</span>
+      </div>
+      <button id="logoutBtn" class="danger small">Sair</button>
+    </header>
+
+    <nav class="tabs" id="tabs">
+      <button data-tab="dashboard" class="active">Painel</button>
+      <button data-tab="produtos">Produtos</button>
+      <button data-tab="wms">Mapa WMS</button>
+      <button data-tab="pedidos">Pedidos</button>
+      <button data-tab="importacao">Importação</button>
+      <button data-tab="logs">Logs</button>
     </nav>
-  </aside>
-  <div id="overlay" class="overlay"></div>
 
-  <main class="app">
-    <section id="dashboard" class="page active">
-      <div class="page-head">
-        <h1>Dashboard</h1>
-        <div class="quick-actions">
-          <button class="pill" data-api="/api/github">GitHub</button>
-          <button class="pill" data-api="/api/railway">Railway</button>
-          <button class="pill" data-api="/api/pwa">PWA</button>
+    <main>
+      <section id="tab-dashboard" class="tab-panel active"></section>
+
+      <section id="tab-produtos" class="tab-panel">
+        <div class="grid-2">
+          <div class="card">
+            <h3>Cadastro único de produtos</h3>
+            <form id="produtoForm" class="form-grid">
+              <input name="codigo" placeholder="Código" required />
+              <input name="nome" placeholder="Produto" required />
+              <input name="material" placeholder="Material" />
+              <input name="quantidade" type="number" min="0" placeholder="Quantidade" />
+              <input name="endereco" placeholder="Endereço WMS ex: 05-001-3-1" />
+              <input name="codigoBarras" placeholder="Código de barras" />
+              <input name="imagem" type="file" accept="image/*" />
+              <button type="submit">Salvar produto</button>
+            </form>
+          </div>
+          <div class="card">
+            <h3>Buscar produtos</h3>
+            <input id="buscaProduto" placeholder="Buscar por código, nome, material ou endereço" />
+            <div id="produtosLista" class="list"></div>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <div class="cards">
-        <article class="card stat">
-          <span class="label">Produtos</span>
-          <strong id="totalProdutos">0</strong>
-        </article>
-        <article class="card stat">
-          <span class="label">Modo</span>
-          <strong>Manual + Automático + Misto</strong>
-        </article>
-      </div>
-
-      <div class="card">
-        <h2>Buscar produto</h2>
-        <input id="dashboardBusca" type="text" placeholder="Ex.: IMA%G% ou CAV03B" />
-        <div id="dashboardResultados" class="result-box">Nenhum produto.</div>
-      </div>
-    </section>
-
-    <section id="produtos" class="page">
-      <div class="page-head">
-        <h1>Produtos</h1>
-      </div>
-
-      <div class="actions-row">
-        <button class="primary" id="novoProdutoBtn">Novo produto</button>
-        <button class="secondary">Importar</button>
-        <button class="secondary">Câmera</button>
-      </div>
-
-      <div class="card">
-        <h2>Cadastrar produto</h2>
-        <div class="form-grid">
-          <input id="codigo" type="text" placeholder="Código" />
-          <input id="nome" type="text" placeholder="Nome" />
-          <input id="material" type="text" placeholder="Material" />
-          <input id="quantidade" type="number" min="0" placeholder="Quantidade" />
+      <section id="tab-wms" class="tab-panel">
+        <div class="card">
+          <h3>Mapa WMS</h3>
+          <div id="wmsMapa"></div>
         </div>
-        <button id="salvarProduto" class="save-btn">Salvar produto</button>
-      </div>
+      </section>
 
-      <div class="card">
-        <h2>Buscar produto</h2>
-        <input id="buscaProduto" type="text" placeholder="Ex.: IMA%G% ou CVB01B" />
-        <div id="listaProdutos" class="result-box">Nenhum produto.</div>
-      </div>
-    </section>
+      <section id="tab-pedidos" class="tab-panel">
+        <div class="grid-2">
+          <div class="card">
+            <h3>Novo pedido</h3>
+            <form id="pedidoForm" class="form-grid">
+              <input name="cliente" placeholder="Cliente" required />
+              <textarea name="itens" placeholder='Use uma linha por item: CODIGO,QUANTIDADE'></textarea>
+              <button type="submit">Criar pedido</button>
+            </form>
+          </div>
+          <div class="card">
+            <h3>Ordens de separação</h3>
+            <div id="pedidosLista" class="list"></div>
+          </div>
+        </div>
+      </section>
 
-    <section id="estoque" class="page"><div class="card"><h1>Estoque</h1><p>Área preparada para a próxima etapa.</p></div></section>
-    <section id="enderecos" class="page"><div class="card"><h1>Endereços</h1><p>Área preparada para a próxima etapa.</p></div></section>
-    <section id="pedidos" class="page"><div class="card"><h1>Pedidos</h1><p>Área preparada para a próxima etapa.</p></div></section>
-    <section id="recebimento" class="page"><div class="card"><h1>Recebimento</h1><p>Área preparada para a próxima etapa.</p></div></section>
-    <section id="inventario" class="page"><div class="card"><h1>Inventário</h1><p>Área preparada para a próxima etapa.</p></div></section>
-    <section id="notificacoes" class="page"><div class="card"><h1>Notificações</h1><p>Área preparada para a próxima etapa.</p></div></section>
-    <section id="configuracoes" class="page"><div class="card"><h1>Configurações</h1><p>Área preparada para a próxima etapa.</p></div></section>
-  </main>
+      <section id="tab-importacao" class="tab-panel">
+        <div class="card">
+          <h3>Importação</h3>
+          <p>Envie CSV ou TXT simples com cabeçalho: <code>codigo,nome,material,quantidade,endereco</code></p>
+          <form id="importForm" class="form-grid">
+            <input name="arquivo" type="file" accept=".csv,.txt" required />
+            <button type="submit">Importar arquivo</button>
+          </form>
+          <div id="importMsg"></div>
+        </div>
+      </section>
 
-  <script src="app.js"></script>
+      <section id="tab-logs" class="tab-panel">
+        <div class="card">
+          <div class="inline-between">
+            <h3>Logs do sistema</h3>
+            <button id="limparLogsBtn" class="danger">Limpar logs</button>
+          </div>
+          <div id="logsLista" class="list"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/modules/login.js"></script>
+  <script src="/modules/produtos.js"></script>
+  <script src="/modules/pedidos.js"></script>
+  <script src="/modules/importacao.js"></script>
+  <script src="/modules/wmsMapa.js"></script>
+  <script src="/modules/estoque.js"></script>
+  <script src="/modules/imagens.js"></script>
+  <script src="/modules/container.js"></script>
+  <script src="/app.js"></script>
 </body>
 </html>
