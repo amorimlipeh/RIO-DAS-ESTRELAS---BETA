@@ -1,95 +1,182 @@
-
-body{
-font-family:Arial;
-margin:0;
-background:#f3f5f9;
+:root{
+  --bg:#eef1f7;
+  --nav:#1d2f73;
+  --nav-soft:#2d469e;
+  --card:#ffffff;
+  --text:#18244f;
+  --muted:#7c87a8;
+  --accent:#f5ab2b;
+  --border:#dfe5f2;
+  --shadow:0 6px 16px rgba(20,34,80,.08);
 }
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
+button,input{font:inherit}
 
 .topbar{
-display:flex;
-align-items:center;
-background:#1f3470;
-color:white;
-padding:10px;
+  position:sticky;
+  top:0;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 14px;
+  background:var(--nav);
+  color:#fff;
+  border-bottom:1px solid rgba(255,255,255,.12);
 }
 
-#menuBtn{
-font-size:20px;
-background:none;
-border:none;
-color:white;
-margin-right:10px;
+.icon-btn{
+  border:none;
+  background:rgba(255,255,255,.12);
+  color:#fff;
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  cursor:pointer;
 }
 
-.title .name{
-font-weight:bold;
+.brand-title{font-size:17px;font-weight:700;line-height:1.1}
+.brand-sub{font-size:12px;opacity:.9;margin-top:3px}
+
+.drawer{
+  position:fixed;
+  top:0;
+  left:-280px;
+  width:260px;
+  height:100dvh;
+  background:var(--nav);
+  color:#fff;
+  z-index:30;
+  transition:left .25s ease;
+  box-shadow:var(--shadow);
+}
+.drawer.open{left:0}
+.drawer-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px;
+  border-bottom:1px solid rgba(255,255,255,.1);
+  font-weight:700;
+}
+.drawer-nav{padding:12px}
+.drawer-nav button{
+  width:100%;
+  border:none;
+  background:var(--nav-soft);
+  color:#fff;
+  padding:16px;
+  border-radius:18px;
+  text-align:left;
+  margin-bottom:12px;
+  cursor:pointer;
+  font-size:18px;
+}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.4);
+  z-index:25;
+  display:none;
+}
+.overlay.show{display:block}
+
+.app{padding:14px}
+.page{display:none}
+.page.active{display:block}
+
+.page-head{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-bottom:14px;
+}
+.page-head h1{margin:0;font-size:20px}
+
+.quick-actions,.actions-row{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
 }
 
-.title .sub{
-font-size:12px;
-opacity:0.8;
+.pill,.secondary,.primary,.save-btn{
+  border:none;
+  border-radius:16px;
+  padding:12px 16px;
+  cursor:pointer;
 }
-
-.menu{
-position:fixed;
-left:-250px;
-top:0;
-width:220px;
-height:100%;
-background:#223a82;
-padding-top:60px;
-transition:0.3s;
-display:flex;
-flex-direction:column;
+.pill,.secondary{
+  background:#fff;
+  color:var(--text);
+  border:1px solid var(--border);
 }
-
-.menu a{
-padding:15px;
-color:white;
-text-decoration:none;
-border-bottom:1px solid rgba(255,255,255,0.1);
+.primary,.save-btn{
+  background:var(--accent);
+  color:#1a1a1a;
+  font-weight:700;
 }
+.save-btn{width:100%;margin-top:12px}
 
-.menu.show{
-left:0;
-}
-
-main{
-padding:15px;
+.cards{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+  margin-bottom:14px;
 }
 
 .card{
-background:white;
-padding:15px;
-border-radius:10px;
-margin-bottom:15px;
-box-shadow:0 2px 6px rgba(0,0,0,0.1);
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:16px;
+  box-shadow:var(--shadow);
+}
+.card h2,.card h1{margin:0 0 12px 0}
+.stat .label{
+  display:block;
+  color:var(--muted);
+  margin-bottom:10px;
+}
+.stat strong{
+  font-size:34px;
 }
 
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+}
 input{
-width:100%;
-padding:10px;
-margin:5px 0;
+  width:100%;
+  border:2px solid var(--border);
+  border-radius:16px;
+  padding:14px 16px;
+  background:#fff;
 }
 
-button{
-padding:10px;
-border:none;
-background:#f6a623;
-color:white;
-border-radius:6px;
+.result-box{
+  margin-top:12px;
+  min-height:58px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:14px;
+  background:#f8faff;
+  color:var(--text);
 }
 
-.actions{
-display:flex;
-gap:10px;
-margin-bottom:10px;
+.result-item{
+  padding:8px 0;
+  border-bottom:1px solid #e8edf7;
 }
+.result-item:last-child{border-bottom:none}
 
-.page{
-display:none;
-}
-
-.page.active{
-display:block;
+@media (min-width: 900px){
+  .topbar{padding-left:284px}
+  .drawer{left:0}
+  .overlay{display:none !important}
+  .app{padding:18px 18px 18px 284px}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .form-grid{grid-template-columns:repeat(2,1fr)}
 }

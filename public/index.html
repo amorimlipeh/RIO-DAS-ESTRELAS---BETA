@@ -1,76 +1,106 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sistema de Estoque - Rio das Estrelas</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema de Estoque ✨ Rio das Estrelas 🌟</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
+  <header class="topbar">
+    <button id="menuBtn" class="icon-btn" aria-label="Abrir menu">☰</button>
+    <div class="brand">
+      <div class="brand-title">SISTEMA DE ESTOQUE ✨</div>
+      <div class="brand-sub">RIO DAS ESTRELAS 🌟</div>
+    </div>
+  </header>
 
-<header class="topbar">
-<button id="menuBtn">☰</button>
-<div class="title">
-<div class="name">SISTEMA DE ESTOQUE ✨</div>
-<div class="sub">RIO DAS ESTRELAS 🌟</div>
-</div>
-</header>
+  <aside id="drawer" class="drawer">
+    <div class="drawer-head">
+      <span>Menu</span>
+      <button id="closeDrawer" class="icon-btn" aria-label="Fechar menu">✕</button>
+    </div>
+    <nav class="drawer-nav">
+      <button data-page="dashboard">Dashboard</button>
+      <button data-page="produtos">Produtos</button>
+      <button data-page="estoque">Estoque</button>
+      <button data-page="enderecos">Endereços</button>
+      <button data-page="pedidos">Pedidos</button>
+      <button data-page="recebimento">Recebimento</button>
+      <button data-page="inventario">Inventário</button>
+      <button data-page="notificacoes">Notificações</button>
+      <button data-page="configuracoes">Configurações</button>
+    </nav>
+  </aside>
+  <div id="overlay" class="overlay"></div>
 
-<nav id="menu" class="menu">
-<a onclick="show('dashboard')">Dashboard</a>
-<a onclick="show('produtos')">Produtos</a>
-<a onclick="show('estoque')">Estoque</a>
-<a onclick="show('enderecos')">Endereços</a>
-<a onclick="show('pedidos')">Pedidos</a>
-<a onclick="show('recebimento')">Recebimento</a>
-<a onclick="show('inventario')">Inventário</a>
-<a onclick="show('notificacoes')">Notificações</a>
-<a onclick="show('config')">Configurações</a>
-</nav>
+  <main class="app">
+    <section id="dashboard" class="page active">
+      <div class="page-head">
+        <h1>Dashboard</h1>
+        <div class="quick-actions">
+          <button class="pill" data-api="/api/github">GitHub</button>
+          <button class="pill" data-api="/api/railway">Railway</button>
+          <button class="pill" data-api="/api/pwa">PWA</button>
+        </div>
+      </div>
 
-<main id="content">
+      <div class="cards">
+        <article class="card stat">
+          <span class="label">Produtos</span>
+          <strong id="totalProdutos">0</strong>
+        </article>
+        <article class="card stat">
+          <span class="label">Modo</span>
+          <strong>Manual + Automático + Misto</strong>
+        </article>
+      </div>
 
-<section id="dashboard" class="page active">
-<h2>Dashboard</h2>
-<div class="card">Produtos cadastrados: <b id="pcount">0</b></div>
-</section>
+      <div class="card">
+        <h2>Buscar produto</h2>
+        <input id="dashboardBusca" type="text" placeholder="Ex.: IMA%G% ou CAV03B" />
+        <div id="dashboardResultados" class="result-box">Nenhum produto.</div>
+      </div>
+    </section>
 
-<section id="produtos" class="page">
-<h2>Produtos</h2>
+    <section id="produtos" class="page">
+      <div class="page-head">
+        <h1>Produtos</h1>
+      </div>
 
-<div class="actions">
-<button onclick="novoProduto()">Novo produto</button>
-<button>Importar</button>
-<button>Câmera</button>
-</div>
+      <div class="actions-row">
+        <button class="primary" id="novoProdutoBtn">Novo produto</button>
+        <button class="secondary">Importar</button>
+        <button class="secondary">Câmera</button>
+      </div>
 
-<div class="card">
-<h3>Cadastrar produto</h3>
-<input id="codigo" placeholder="Código">
-<input id="nome" placeholder="Nome">
-<button onclick="salvar()">Salvar produto</button>
-</div>
+      <div class="card">
+        <h2>Cadastrar produto</h2>
+        <div class="form-grid">
+          <input id="codigo" type="text" placeholder="Código" />
+          <input id="nome" type="text" placeholder="Nome" />
+          <input id="material" type="text" placeholder="Material" />
+          <input id="quantidade" type="number" min="0" placeholder="Quantidade" />
+        </div>
+        <button id="salvarProduto" class="save-btn">Salvar produto</button>
+      </div>
 
-<div class="card">
-<h3>Buscar produto</h3>
-<input id="busca" placeholder="Ex: IMA%G%" oninput="buscar()">
-<ul id="lista"></ul>
-</div>
+      <div class="card">
+        <h2>Buscar produto</h2>
+        <input id="buscaProduto" type="text" placeholder="Ex.: IMA%G% ou CVB01B" />
+        <div id="listaProdutos" class="result-box">Nenhum produto.</div>
+      </div>
+    </section>
 
-</section>
+    <section id="estoque" class="page"><div class="card"><h1>Estoque</h1><p>Área preparada para a próxima etapa.</p></div></section>
+    <section id="enderecos" class="page"><div class="card"><h1>Endereços</h1><p>Área preparada para a próxima etapa.</p></div></section>
+    <section id="pedidos" class="page"><div class="card"><h1>Pedidos</h1><p>Área preparada para a próxima etapa.</p></div></section>
+    <section id="recebimento" class="page"><div class="card"><h1>Recebimento</h1><p>Área preparada para a próxima etapa.</p></div></section>
+    <section id="inventario" class="page"><div class="card"><h1>Inventário</h1><p>Área preparada para a próxima etapa.</p></div></section>
+    <section id="notificacoes" class="page"><div class="card"><h1>Notificações</h1><p>Área preparada para a próxima etapa.</p></div></section>
+    <section id="configuracoes" class="page"><div class="card"><h1>Configurações</h1><p>Área preparada para a próxima etapa.</p></div></section>
+  </main>
 
-<section id="estoque" class="page"><h2>Estoque</h2></section>
-<section id="enderecos" class="page"><h2>Endereços</h2></section>
-<section id="pedidos" class="page"><h2>Pedidos</h2></section>
-<section id="recebimento" class="page"><h2>Recebimento</h2></section>
-<section id="inventario" class="page"><h2>Inventário</h2></section>
-<section id="notificacoes" class="page"><h2>Notificações</h2></section>
-<section id="config" class="page"><h2>Configurações</h2></section>
-
-</main>
-
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
