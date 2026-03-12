@@ -1,186 +1,61 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Projeto Rio das Estrelas</title>
-
 <style>
-
-body{
-background:#07132b;
-font-family:Arial;
-color:white;
-display:flex;
-align-items:center;
-justify-content:center;
-height:100vh;
-margin:0;
-}
-
-.container{
-background:#0f1c3a;
-padding:40px;
-border-radius:12px;
-width:320px;
-box-shadow:0 0 10px rgba(0,0,0,0.4);
-}
-
-h1{
-font-size:26px;
-margin-bottom:5px;
-}
-
-h2{
-font-size:16px;
-font-weight:normal;
-margin-bottom:20px;
-color:#ccc;
-}
-
-input{
-width:100%;
-padding:12px;
-margin-bottom:12px;
-border-radius:8px;
-border:none;
-font-size:16px;
-}
-
-button{
-width:100%;
-padding:12px;
-background:#2ecc71;
-border:none;
-border-radius:8px;
-font-size:16px;
-font-weight:bold;
-cursor:pointer;
-}
-
-button:hover{
-background:#27ae60;
-}
-
-.info{
-margin-top:10px;
-font-size:13px;
-color:#bbb;
-}
-
-.status{
-margin-top:8px;
-font-size:13px;
-color:#9be7ff;
-}
-
+body{background:#07132b;font-family:Arial,sans-serif;color:white;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;padding:16px;box-sizing:border-box}
+.container{background:#0f1c3a;padding:28px;border-radius:16px;width:min(360px,100%);box-shadow:0 12px 30px rgba(0,0,0,.35)}
+h1{font-size:26px;margin:0 0 6px} h2{font-size:15px;font-weight:normal;margin:0 0 18px;color:#cfd8ea}
+input,button{width:100%;padding:13px;margin-bottom:12px;border-radius:10px;border:none;font-size:16px;box-sizing:border-box}
+button{background:#2ecc71;font-weight:bold;cursor:pointer} button:hover{background:#27ae60}
+.info,.status{font-size:13px}.info{color:#cfd8ea}.status{margin-top:8px;color:#9be7ff;min-height:18px}
+.small{font-size:12px;color:#89a4d1;margin-top:8px}
 </style>
-
 </head>
-
 <body>
-
 <div class="container">
-
-<h1>Projeto Rio das Estrelas</h1>
-<h2>WMS + Estoque • V11 Final</h2>
-
-<input id="usuario" placeholder="Usuário">
-
-<input id="senha" type="password" placeholder="Senha">
-
-<button id="btnLogin">Acessar conta</button>
-
-<div class="info">
-Usuário teste: admin / admin123
+  <h1>Projeto Rio das Estrelas</h1>
+  <h2>WMS + Estoque • V11.1</h2>
+  <input id="usuario" placeholder="Usuário" autocomplete="username">
+  <input id="senha" type="password" placeholder="Senha" autocomplete="current-password">
+  <button id="btnLogin">Acessar conta</button>
+  <div class="info">Admin padrão: <strong>admin / admin123</strong></div>
+  <div class="small">Também aceita usuários cadastrados em <code>data/usuarios.json</code>.</div>
+  <div class="status" id="status">Verificando servidor...</div>
 </div>
-
-<div class="status" id="status">
-Verificando servidor...
-</div>
-
-</div>
-
 <script>
-
+async function api(url, options={}) {
+  const r = await fetch(url, {cache:'no-store', ...options, headers:{'Content-Type':'application/json', ...(options.headers||{})}});
+  const data = await r.json().catch(()=>({}));
+  if (!r.ok) throw new Error(data.mensagem || data.message || 'Erro na requisição');
+  return data;
+}
 async function verificarServidor(){
-
-try{
-
-const r = await fetch("/api/ping")
-
-if(r.ok){
-document.getElementById("status").innerText =
-"Servidor online. Faça login."
+  const status = document.getElementById('status');
+  try {
+    const s = await api('/api/session');
+    status.textContent = 'Servidor online. Faça login.';
+    if (s.ok) window.location.href = '/app';
+  } catch {
+    status.textContent = 'Servidor offline.';
+  }
 }
-
-}catch{
-
-document.getElementById("status").innerText =
-"Servidor offline."
-
-}
-
-}
-
-verificarServidor()
-
 async function fazerLogin(){
-
-const usuario = document.getElementById("usuario").value
-const senha = document.getElementById("senha").value
-
-if(!usuario || !senha){
-alert("Preencha usuário e senha")
-return
+  const usuario = document.getElementById('usuario').value.trim();
+  const senha = document.getElementById('senha').value.trim();
+  if(!usuario || !senha){ alert('Preencha usuário e senha'); return; }
+  try {
+    const dados = await api('/api/login', {method:'POST', body:JSON.stringify({usuario, senha})});
+    if (dados.ok) window.location.href = '/app';
+  } catch(e){
+    alert(e.message || 'Erro ao conectar com servidor');
+  }
 }
-
-try{
-
-const resposta = await fetch("/api/login",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-usuario:usuario,
-senha:senha
-})
-})
-
-const dados = await resposta.json()
-
-if (dados.ok) {
-
-  alert("Login realizado com sucesso")
-
-  // redireciona para o painel
-  window.location.href = "/app"
-
-}
-
-}else{
-
-alert("Usuário ou senha inválidos")
-
-}
-
-}catch(e){
-
-console.log(e)
-
-alert("Erro ao conectar com servidor")
-
-}
-
-}
-
-document.getElementById("btnLogin")
-.addEventListener("click",fazerLogin)
-
+document.getElementById('btnLogin').addEventListener('click', fazerLogin);
+document.getElementById('senha').addEventListener('keydown', (e)=>{ if(e.key==='Enter') fazerLogin(); });
+verificarServidor();
 </script>
-
 </body>
 </html>
