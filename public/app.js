@@ -1,4 +1,4 @@
-window.APP_VERSION = '11.2-login-hardfix';
+window.APP_VERSION = '11.3-login-recovery';
 window.state = { user: null };
 
 const $ = (selector) => document.querySelector(selector);
@@ -92,7 +92,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     msg.textContent = 'Verificando servidor...';
     try {
       await window.api('/api/ping');
-      msg.textContent = 'Servidor online. Faça login.';
+      msg.textContent = 'Servidor online. Faça login. v11.3';
     } catch (error) {
       msg.textContent = 'Servidor offline ou desatualizado: ' + error.message;
     }
