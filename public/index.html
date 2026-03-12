@@ -1,127 +1,183 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projeto Rio das Estrelas V11</title>
-  <link rel="manifest" href="/pwa/manifest.json" />
-  <link rel="stylesheet" href="/style.css" />
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Projeto Rio das Estrelas</title>
+
+<style>
+
+body{
+background:#07132b;
+font-family:Arial;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+height:100vh;
+margin:0;
+}
+
+.container{
+background:#0f1c3a;
+padding:40px;
+border-radius:12px;
+width:320px;
+box-shadow:0 0 10px rgba(0,0,0,0.4);
+}
+
+h1{
+font-size:26px;
+margin-bottom:5px;
+}
+
+h2{
+font-size:16px;
+font-weight:normal;
+margin-bottom:20px;
+color:#ccc;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-bottom:12px;
+border-radius:8px;
+border:none;
+font-size:16px;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#2ecc71;
+border:none;
+border-radius:8px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#27ae60;
+}
+
+.info{
+margin-top:10px;
+font-size:13px;
+color:#bbb;
+}
+
+.status{
+margin-top:8px;
+font-size:13px;
+color:#9be7ff;
+}
+
+</style>
+
 </head>
+
 <body>
-  <div id="loginScreen" class="login-screen">
-    <div class="login-card">
-      <h1>Projeto Rio das Estrelas</h1>
-      <p>WMS + Estoque • V11 Final</p>
-      <form id="loginForm">
-        <input id="usuario">
-<input id="senha" type="password">
-        <button type="submit">Acessar conta</button>
-      </form>
-      <small>Usuário teste: admin / admin123</small>
-      <div id="loginMsg"></div>
-    </div>
-  </div>
 
-  <div id="app" class="app hidden">
-    <header class="topbar">
-      <div>
-        <h2>Projeto Rio das Estrelas</h2>
-        <span id="userLabel">Usuário</span>
-      </div>
-      <button id="logoutBtn" class="danger small">Sair</button>
-    </header>
+<div class="container">
 
-    <nav class="tabs" id="tabs">
-      <button data-tab="dashboard" class="active">Painel</button>
-      <button data-tab="produtos">Produtos</button>
-      <button data-tab="wms">Mapa WMS</button>
-      <button data-tab="pedidos">Pedidos</button>
-      <button data-tab="importacao">Importação</button>
-      <button data-tab="logs">Logs</button>
-    </nav>
+<h1>Projeto Rio das Estrelas</h1>
+<h2>WMS + Estoque • V11 Final</h2>
 
-    <main>
-      <section id="tab-dashboard" class="tab-panel active"></section>
+<input id="usuario" placeholder="Usuário">
 
-      <section id="tab-produtos" class="tab-panel">
-        <div class="grid-2">
-          <div class="card">
-            <h3>Cadastro único de produtos</h3>
-            <form id="produtoForm" class="form-grid">
-              <input name="codigo" placeholder="Código" required />
-              <input name="nome" placeholder="Produto" required />
-              <input name="material" placeholder="Material" />
-              <input name="quantidade" type="number" min="0" placeholder="Quantidade" />
-              <input name="endereco" placeholder="Endereço WMS ex: 05-001-3-1" />
-              <input name="codigoBarras" placeholder="Código de barras" />
-              <input name="imagem" type="file" accept="image/*" />
-              <button type="submit">Salvar produto</button>
-            </form>
-          </div>
-          <div class="card">
-            <h3>Buscar produtos</h3>
-            <input id="buscaProduto" placeholder="Buscar por código, nome, material ou endereço" />
-            <div id="produtosLista" class="list"></div>
-          </div>
-        </div>
-      </section>
+<input id="senha" type="password" placeholder="Senha">
 
-      <section id="tab-wms" class="tab-panel">
-        <div class="card">
-          <h3>Mapa WMS</h3>
-          <div id="wmsMapa"></div>
-        </div>
-      </section>
+<button id="btnLogin">Acessar conta</button>
 
-      <section id="tab-pedidos" class="tab-panel">
-        <div class="grid-2">
-          <div class="card">
-            <h3>Novo pedido</h3>
-            <form id="pedidoForm" class="form-grid">
-              <input name="cliente" placeholder="Cliente" required />
-              <textarea name="itens" placeholder='Use uma linha por item: CODIGO,QUANTIDADE'></textarea>
-              <button type="submit">Criar pedido</button>
-            </form>
-          </div>
-          <div class="card">
-            <h3>Ordens de separação</h3>
-            <div id="pedidosLista" class="list"></div>
-          </div>
-        </div>
-      </section>
+<div class="info">
+Usuário teste: admin / admin123
+</div>
 
-      <section id="tab-importacao" class="tab-panel">
-        <div class="card">
-          <h3>Importação</h3>
-          <p>Envie CSV ou TXT simples com cabeçalho: <code>codigo,nome,material,quantidade,endereco</code></p>
-          <form id="importForm" class="form-grid">
-            <input name="arquivo" type="file" accept=".csv,.txt" required />
-            <button type="submit">Importar arquivo</button>
-          </form>
-          <div id="importMsg"></div>
-        </div>
-      </section>
+<div class="status" id="status">
+Verificando servidor...
+</div>
 
-      <section id="tab-logs" class="tab-panel">
-        <div class="card">
-          <div class="inline-between">
-            <h3>Logs do sistema</h3>
-            <button id="limparLogsBtn" class="danger">Limpar logs</button>
-          </div>
-          <div id="logsLista" class="list"></div>
-        </div>
-      </section>
-    </main>
-  </div>
+</div>
 
-  <script src="/app.js?v=11.3"></script>
-  <script src="/modules/login.js?v=11.3"></script>
-  <script src="/modules/produtos.js?v=11.3"></script>
-  <script src="/modules/pedidos.js?v=11.3"></script>
-  <script src="/modules/importacao.js?v=11.3"></script>
-  <script src="/modules/wmsMapa.js?v=11.3"></script>
-  <script src="/modules/estoque.js?v=11.3"></script>
-  <script src="/modules/imagens.js?v=11.3"></script>
-  <script src="/modules/container.js?v=11.3"></script>
+<script>
+
+async function verificarServidor(){
+
+try{
+
+const r = await fetch("/api/ping")
+
+if(r.ok){
+document.getElementById("status").innerText =
+"Servidor online. Faça login."
+}
+
+}catch{
+
+document.getElementById("status").innerText =
+"Servidor offline."
+
+}
+
+}
+
+verificarServidor()
+
+async function fazerLogin(){
+
+const usuario = document.getElementById("usuario").value
+const senha = document.getElementById("senha").value
+
+if(!usuario || !senha){
+alert("Preencha usuário e senha")
+return
+}
+
+try{
+
+const resposta = await fetch("/api/login",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+usuario:usuario,
+senha:senha
+})
+})
+
+const dados = await resposta.json()
+
+if(dados.ok){
+
+alert("Login realizado com sucesso")
+
+window.location.href="/app"
+
+}else{
+
+alert("Usuário ou senha inválidos")
+
+}
+
+}catch(e){
+
+console.log(e)
+
+alert("Erro ao conectar com servidor")
+
+}
+
+}
+
+document.getElementById("btnLogin")
+.addEventListener("click",fazerLogin)
+
+</script>
+
 </body>
 </html>
