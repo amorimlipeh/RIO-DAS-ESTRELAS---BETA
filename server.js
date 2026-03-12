@@ -63,12 +63,12 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/api/ping", (req, res) => {
   res.json({ status: "ok" });
 });
-
 app.post("/api/login", (req, res) => {
   try {
     const { usuario, senha } = req.body || {};
