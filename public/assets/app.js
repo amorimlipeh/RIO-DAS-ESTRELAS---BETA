@@ -3,8 +3,8 @@ const $$ = (sel) => [...document.querySelectorAll(sel)];
 
 async function api(url, options = {}) {
   const res = await fetch(url, {
-    headers: { "Content-Type": "application/json" },
-    ...options
+    ...options,
+    headers: { "Content-Type": "application/json", ...(options.headers || {}) }
   });
   const data = await res.json();
   if (!res.ok) throw new Error(data.message || "Erro na requisição");
@@ -177,7 +177,7 @@ async function boot() {
     await Promise.all([loadDashboard(), loadProdutos(), loadResumoEstoque(), loadEnderecos(), loadPedidos(), loadNotificacoes()]);
   } catch (error) {
     console.error(error);
-    alert(error.message);
+    console.error(error); alert(error.message);
   }
 }
 
@@ -186,3 +186,21 @@ if ("serviceWorker" in navigator) {
 }
 
 boot();
+
+
+async function ensureSession(){
+  try {
+    const s = await api('/api/session');
+    if (!s.ok) { location.href = '/'; return false; }
+    return true;
+  } catch { location.href = '/'; return false; }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  if (!await ensureSession()) return;
+  const logout = document.createElement('button');
+  logout.textContent = 'Sair';
+  logout.style.marginLeft = '8px';
+  logout.onclick = async () => { await api('/api/logout', { method: 'POST' }); location.href = '/'; };
+  document.querySelector('.chips')?.appendChild(logout);
+});
