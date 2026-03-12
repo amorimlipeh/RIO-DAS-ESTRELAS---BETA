@@ -1,14 +1,26 @@
-window.state = {
-  user: null
-};
+window.APP_VERSION = '11.2-login-hardfix';
+window.state = { user: null };
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 
 window.api = async (url, options = {}) => {
-  const response = await fetch(url, options);
-  const data = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(data.error || 'Erro na requisição');
+  const response = await fetch(url, {
+    cache: 'no-store',
+    ...options,
+    headers: {
+      ...(options.headers || {}),
+      'Cache-Control': 'no-cache'
+    }
+  });
+
+  const text = await response.text();
+  let data = {};
+  try { data = text ? JSON.parse(text) : {}; } catch { data = { raw: text }; }
+
+  if (!response.ok) {
+    throw new Error(data.error || data.message || `Erro ${response.status} ao acessar ${url}`);
+  }
   return data;
 };
 
@@ -40,6 +52,18 @@ async function loadDashboard() {
   `;
 }
 
+window.loadLogs = async function loadLogs() {
+  const logs = await api('/api/logs');
+  const el = $('#logsLista');
+  if (!el) return;
+  el.innerHTML = logs.map((l) => `
+    <div class="item">
+      <strong>📜 ${l.dataHora}</strong>
+      <div>${l.usuario} • ${l.acao}</div>
+    </div>
+  `).join('') || '<div class="item">Sem logs.</div>';
+};
+
 window.refreshAll = async function refreshAll() {
   await loadDashboard();
   await window.loadProdutos?.();
@@ -55,9 +79,31 @@ window.startApp = async function startApp(user) {
   $('#app').classList.remove('hidden');
   setupTabs();
   $('#logoutBtn').onclick = () => location.reload();
-  await refreshAll();
+  try {
+    await refreshAll();
+  } catch (error) {
+    alert('Login feito, mas houve erro ao carregar a tela: ' + error.message);
+  }
 };
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/pwa/service-worker.js').catch(() => {});
-}
+window.addEventListener('DOMContentLoaded', async () => {
+  const msg = document.getElementById('loginMsg');
+  if (msg) {
+    msg.textContent = 'Verificando servidor...';
+    try {
+      await window.api('/api/ping');
+      msg.textContent = 'Servidor online. Faça login.';
+    } catch (error) {
+      msg.textContent = 'Servidor offline ou desatualizado: ' + error.message;
+    }
+  }
+
+  const limparBtn = document.getElementById('limparLogsBtn');
+  if (limparBtn) {
+    limparBtn.onclick = async () => {
+      if (!confirm('Limpar todos os logs?')) return;
+      await window.api('/api/logs', { method: 'DELETE' });
+      await window.loadLogs();
+    };
+  }
+});
