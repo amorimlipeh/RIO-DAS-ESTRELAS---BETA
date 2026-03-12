@@ -1,220 +1,76 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SISTEMA DE ESTOQUE ✨ RIO DAS ESTRELAS 🌟</title>
-  <link rel="manifest" href="/manifest.json" />
-  <link rel="stylesheet" href="/style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema de Estoque - Rio das Estrelas</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <aside class="sidebar">
-    <div class="brand">
-      <img src="/assets/img/logo.png" alt="Logo" class="logo" />
-      <div>
-        <h1>SISTEMA DE ESTOQUE ✨</h1>
-        <p>RIO DAS ESTRELAS 🌟</p>
-      </div>
-    </div>
-    <nav>
-      <button data-view="dashboard">Dashboard</button>
-      <button data-view="produtos">Produtos</button>
-      <button data-view="estoque">Estoque</button>
-      <button data-view="enderecos">Endereços</button>
-      <button data-view="pedidos">Pedidos</button>
-      <button data-view="recebimento">Recebimento</button>
-      <button data-view="inventarios">Inventário</button>
-      <button data-view="notificacoes">Notificações</button>
-      <button data-view="configuracoes">Configurações</button>
-    </nav>
-  </aside>
 
-  <main class="content">
-    <header class="topbar">
-      <div>
-        <strong id="view-title">Dashboard</strong>
-        <span class="hint">Manual + Automático + Modo Misto</span>
-      </div>
-      <div class="chips">
-        <span class="chip">GitHub</span>
-        <span class="chip">Railway</span>
-        <span class="chip">PWA</span>
-      </div>
-    </header>
+<header class="topbar">
+<button id="menuBtn">☰</button>
+<div class="title">
+<div class="name">SISTEMA DE ESTOQUE ✨</div>
+<div class="sub">RIO DAS ESTRELAS 🌟</div>
+</div>
+</header>
 
-    <section id="dashboard" class="view active"></section>
+<nav id="menu" class="menu">
+<a onclick="show('dashboard')">Dashboard</a>
+<a onclick="show('produtos')">Produtos</a>
+<a onclick="show('estoque')">Estoque</a>
+<a onclick="show('enderecos')">Endereços</a>
+<a onclick="show('pedidos')">Pedidos</a>
+<a onclick="show('recebimento')">Recebimento</a>
+<a onclick="show('inventario')">Inventário</a>
+<a onclick="show('notificacoes')">Notificações</a>
+<a onclick="show('config')">Configurações</a>
+</nav>
 
-    <section id="produtos" class="view">
-      <div class="grid two">
-        <div class="card">
-          <h2>Cadastrar produto</h2>
-          <form id="form-produto">
-            <input name="codigo" placeholder="Código" required />
-            <input name="nome" placeholder="Nome" required />
-            <input name="material" placeholder="Material" />
-            <input name="categoria" placeholder="Categoria" />
-            <input name="estoqueMinimo" placeholder="Estoque mínimo" type="number" />
-            <button type="submit">Salvar produto</button>
-          </form>
-        </div>
-        <div class="card">
-          <h2>Buscar produto</h2>
-          <input id="busca-produto" placeholder="Ex.: IMA%G%" />
-          <div id="lista-produtos" class="list"></div>
-        </div>
-      </div>
-    </section>
+<main id="content">
 
-    <section id="estoque" class="view">
-      <div class="grid two">
-        <div class="card">
-          <h2>Movimentar estoque</h2>
-          <form id="form-estoque">
-            <select name="tipo">
-              <option value="entrada">Entrada</option>
-              <option value="saida">Saída</option>
-            </select>
-            <input name="produtoCodigo" placeholder="Código do produto" required />
-            <input name="endereco" placeholder="Endereço 05-001-1" />
-            <input name="quantidade" placeholder="Quantidade" type="number" required />
-            <input name="usuario" placeholder="Usuário" value="admin" />
-            <input name="motivo" placeholder="Motivo" />
-            <button type="submit">Movimentar</button>
-          </form>
-        </div>
-        <div class="card">
-          <h2>Resumo de estoque</h2>
-          <div id="resumo-estoque" class="list"></div>
-        </div>
-      </div>
-    </section>
+<section id="dashboard" class="page active">
+<h2>Dashboard</h2>
+<div class="card">Produtos cadastrados: <b id="pcount">0</b></div>
+</section>
 
-    <section id="enderecos" class="view">
-      <div class="grid two">
-        <div class="card">
-          <h2>Gerar mapa automático</h2>
-          <form id="form-mapa">
-            <input name="ruaInicial" type="number" value="1" />
-            <input name="ruaFinal" type="number" value="10" />
-            <input name="posicaoMax" type="number" value="20" />
-            <input name="andares" type="number" value="3" />
-            <button type="submit">Gerar mapa</button>
-          </form>
-        </div>
-        <div class="card">
-          <h2>Endereços</h2>
-          <div id="lista-enderecos" class="list"></div>
-        </div>
-      </div>
-    </section>
+<section id="produtos" class="page">
+<h2>Produtos</h2>
 
-    <section id="pedidos" class="view">
-      <div class="grid two">
-        <div class="card">
-          <h2>Criar pedido</h2>
-          <form id="form-pedido">
-            <input name="numero" placeholder="Número do pedido" />
-            <input name="cliente" placeholder="Cliente" />
-            <textarea name="itensJson" placeholder='[{"produtoCodigo":"IMA01G","quantidade":10}]'></textarea>
-            <button type="submit">Criar pedido</button>
-          </form>
-        </div>
-        <div class="card">
-          <h2>Pedidos</h2>
-          <div id="lista-pedidos" class="list"></div>
-        </div>
-      </div>
-    </section>
+<div class="actions">
+<button onclick="novoProduto()">Novo produto</button>
+<button>Importar</button>
+<button>Câmera</button>
+</div>
 
-    <section id="recebimento" class="view">
-      <div class="card">
-        <h2>Novo recebimento</h2>
-        <form id="form-recebimento">
-          <input name="documento" placeholder="Documento" />
-          <input name="fornecedor" placeholder="Fornecedor" />
-          <select name="modoEndereco">
-            <option value="manual">Manual</option>
-            <option value="misto" selected>Misto</option>
-            <option value="automatico">Automático</option>
-          </select>
-          <textarea name="itensJson" placeholder='[{"produtoCodigo":"IMA01G","quantidade":10}]'></textarea>
-          <button type="submit">Registrar recebimento</button>
-        </form>
-      </div>
-    </section>
+<div class="card">
+<h3>Cadastrar produto</h3>
+<input id="codigo" placeholder="Código">
+<input id="nome" placeholder="Nome">
+<button onclick="salvar()">Salvar produto</button>
+</div>
 
-    <section id="inventarios" class="view">
-      <div class="card">
-        <h2>Abrir inventário</h2>
-        <form id="form-inventario">
-          <select name="tipo">
-            <option value="rua">Por rua</option>
-            <option value="endereco">Por endereço</option>
-            <option value="produto">Por produto</option>
-            <option value="geral">Geral</option>
-          </select>
-          <input name="rua" placeholder="Rua" />
-          <input name="endereco" placeholder="Endereço" />
-          <input name="produtoCodigo" placeholder="Produto" />
-          <input name="responsavel" placeholder="Responsável" />
-          <button type="submit">Criar inventário</button>
-        </form>
-      </div>
-    </section>
+<div class="card">
+<h3>Buscar produto</h3>
+<input id="busca" placeholder="Ex: IMA%G%" oninput="buscar()">
+<ul id="lista"></ul>
+</div>
 
-    <section id="notificacoes" class="view">
-      <div class="grid two">
-        <div class="card">
-          <h2>Mensagem prioritária</h2>
-          <form id="form-notificacao">
-            <select name="prioridade">
-              <option value="alta">Alta</option>
-              <option value="media" selected>Média</option>
-              <option value="baixa">Baixa</option>
-            </select>
-            <input name="usuario" placeholder="Usuário ou todos" value="todos" />
-            <textarea name="mensagem" placeholder="Mensagem"></textarea>
-            <button type="submit">Enviar notificação</button>
-          </form>
-        </div>
-        <div class="card">
-          <h2>Lista de notificações</h2>
-          <div id="lista-notificacoes" class="list"></div>
-        </div>
-      </div>
-    </section>
+</section>
 
-    <section id="configuracoes" class="view">
-      <div class="card">
-        <h2>Configurações operacionais</h2>
-        <form id="form-config">
-          <label>Estoque negativo
-            <select name="estoqueNegativo">
-              <option value="nunca">Nunca</option>
-              <option value="permissao" selected>Apenas com permissão</option>
-              <option value="sempre">Sempre</option>
-            </select>
-          </label>
-          <label>Reserva do pedido
-            <select name="reservaPedido">
-              <option value="manual">Manual</option>
-              <option value="automatica_criacao">Automática ao criar</option>
-              <option value="automatica_inicio_separacao" selected>Automática no início da separação</option>
-            </select>
-          </label>
-          <label>Endereçamento no recebimento
-            <select name="enderecamentoRecebimento">
-              <option value="manual">Manual</option>
-              <option value="misto" selected>Misto</option>
-              <option value="automatico">Automático</option>
-            </select>
-          </label>
-          <button type="submit">Salvar configurações</button>
-        </form>
-      </div>
-    </section>
-  </main>
+<section id="estoque" class="page"><h2>Estoque</h2></section>
+<section id="enderecos" class="page"><h2>Endereços</h2></section>
+<section id="pedidos" class="page"><h2>Pedidos</h2></section>
+<section id="recebimento" class="page"><h2>Recebimento</h2></section>
+<section id="inventario" class="page"><h2>Inventário</h2></section>
+<section id="notificacoes" class="page"><h2>Notificações</h2></section>
+<section id="config" class="page"><h2>Configurações</h2></section>
 
-  <script src="/app.js"></script>
+</main>
+
+<script src="app.js"></script>
 </body>
 </html>
