@@ -1,11 +1,11 @@
 {
-  "name": "rio-das-estrelas-estoque",
-  "version": "10.0.0",
+  "name": "sistema-estoque-rio-das-estrelas",
+  "version": "10.1.0",
   "type": "module",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.19.2"
   }
 }
