@@ -1,37 +1,29 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('loginForm');
-  const button = form?.querySelector('button[type="submit"]');
-  const msg = document.getElementById('loginMsg');
+async function fazerLogin() {
+  const usuario = document.querySelector("#usuario").value;
+  const senha = document.querySelector("#senha").value;
 
-  async function doLogin(e) {
-    e?.preventDefault?.();
-    if (!form) return;
+  try {
+    const resposta = await fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ usuario, senha })
+    });
 
-    const usuario = (form.usuario?.value || '').trim();
-    const senha = form.senha?.value || '';
+    const dados = await resposta.json();
 
-    msg.textContent = 'Entrando...';
-    if (button) button.disabled = true;
-
-    try {
-      const data = await window.api('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ usuario, senha })
-      });
-      msg.textContent = 'Login realizado.';
-      await window.startApp(data.usuario);
-    } catch (error) {
-      if (usuario.toLowerCase() === 'admin' && senha === 'admin123') {
-        msg.textContent = 'Entrando em modo de recuperação...';
-        await window.startApp({ id: 1, nome: 'Administrador', usuario: 'admin', tipo: 'Administrador' });
-        return;
-      }
-      msg.textContent = error.message || 'Falha no login.';
-    } finally {
-      if (button) button.disabled = false;
+    if (dados.ok) {
+      alert("Login realizado");
+      location.reload();
+    } else {
+      alert("Usuário ou senha inválidos");
     }
-  }
 
-  form?.addEventListener('submit', doLogin);
-});
+  } catch (erro) {
+    console.error("Erro no login:", erro);
+    alert("Erro ao conectar com o servidor");
+  }
+}
+
+document.querySelector("#btnLogin").addEventListener("click", fazerLogin);
