@@ -1,9 +1,3 @@
 [
-  {
-    "id": "LOG-1",
-    "dataHora": "2026-03-11T00:00:00.000Z",
-    "modulo": "sistema",
-    "acao": "inicio",
-    "descricao": "Base inicial carregada."
-  }
+  {"id":1,"dataHora":"11/03/2026 19:10:00","usuario":"sistema","acao":"V11 Final criada"}
 ]

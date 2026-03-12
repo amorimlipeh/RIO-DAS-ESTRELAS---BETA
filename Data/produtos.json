@@ -1,1 +1,24 @@
-[]
+[
+  {
+    "id": 1,
+    "codigo": "IMA01G",
+    "nome": "Filme Stretch",
+    "material": "Plástico",
+    "quantidade": 120,
+    "endereco": "05-001-3-1",
+    "codigoBarras": "IMA01G",
+    "imagem": "",
+    "criadoEm": "11/03/2026 19:00:00"
+  },
+  {
+    "id": 2,
+    "codigo": "PDF02P",
+    "nome": "Saco Plástico",
+    "material": "Polietileno",
+    "quantidade": 80,
+    "endereco": "05-002-1-1",
+    "codigoBarras": "PDF02P",
+    "imagem": "",
+    "criadoEm": "11/03/2026 19:05:00"
+  }
+]

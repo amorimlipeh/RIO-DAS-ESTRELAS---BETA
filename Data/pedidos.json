@@ -1,16 +1,1 @@
-[
-  {
-    "id": "PED-1",
-    "numero": "3021",
-    "cliente": "Cliente Exemplo",
-    "status": "novo",
-    "reservaModo": "automatica_inicio_separacao",
-    "itens": [
-      {
-        "produtoCodigo": "IMA01G",
-        "quantidade": 10
-      }
-    ],
-    "criadoEm": "2026-03-11T00:00:00.000Z"
-  }
-]
+[]
