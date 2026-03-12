@@ -1,0 +1,65 @@
+{
+  "versao": "V11.4",
+  "ruas": [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07"
+  ],
+  "ruas_bloqueadas": [
+    "01",
+    "02",
+    "03"
+  ],
+  "ruas_ativas": [
+    "04",
+    "05",
+    "06",
+    "07"
+  ],
+  "posicoes_por_rua": 140,
+  "andares_maximos": 7,
+  "buracos": [
+    {
+      "inicio": 49,
+      "fim": 54,
+      "andares_validos": [
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "inicio": 95,
+      "fim": 100,
+      "andares_validos": [
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  ],
+  "formato_endereco": "RUA-POSICAO-ANDAR",
+  "tipos_enderecamento": [
+    "fixo",
+    "multiplo",
+    "dinamico"
+  ],
+  "abc": {
+    "A": [
+      "04"
+    ],
+    "B": [
+      "05",
+      "06"
+    ],
+    "C": [
+      "07"
+    ]
+  }
+}

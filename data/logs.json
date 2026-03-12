@@ -1,18 +1,7 @@
 [
   {
-    "id": "LOG-1",
-    "dataHora": "2026-03-12T10:01:41.902Z",
-    "usuario": "admin",
-    "acao": "login",
-    "modulo": "auth",
-    "descricao": "Login do usuário admin."
-  },
-  {
-    "id": "LOG-2",
-    "dataHora": "2026-03-11T19:10:00.000Z",
-    "usuario": "sistema",
-    "acao": "implantacao",
-    "modulo": "sistema",
-    "descricao": "Base V11.2 profissional preparada."
+    "tipo": "sistema",
+    "mensagem": "Base V11.4 gerada",
+    "data": "2026-03-12T09:00:00Z"
   }
 ]

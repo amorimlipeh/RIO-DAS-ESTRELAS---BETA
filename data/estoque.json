@@ -1,4 +1,12 @@
 [
-  {"id":1,"codigo":"IMA01G","nome":"Filme Stretch","quantidade":120,"endereco":"05-001-3-1"},
-  {"id":2,"codigo":"PDF02P","nome":"Saco Plástico","quantidade":80,"endereco":"05-002-1-1"}
+  {
+    "codigo": "IMA01G",
+    "endereco": "04-013-2",
+    "quantidade": 12
+  },
+  {
+    "codigo": "PDF02P",
+    "endereco": "05-021-1",
+    "quantidade": 8
+  }
 ]

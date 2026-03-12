@@ -1,30 +1,25 @@
 [
   {
-    "id": 1,
     "codigo": "IMA01G",
-    "nome": "Filme Stretch",
-    "material": "Plástico",
-    "categoria": "Embalagem",
+    "nome": "Produto teste imagem",
+    "material": "Plastico",
     "estoqueMinimo": 10,
-    "endereco": "05-001-3-1",
-    "codigoBarras": "IMA01G",
-    "imagem": "",
-    "criadoEm": "2026-03-11T19:00:00.000Z",
-    "atualizadoEm": "2026-03-11T19:00:00.000Z",
-    "quantidadeBase": 0
+    "tipoEndereco": "fixo",
+    "enderecos": [
+      "04-013-2"
+    ],
+    "classeABC": "A"
   },
   {
-    "id": 2,
     "codigo": "PDF02P",
-    "nome": "Saco Plástico",
-    "material": "Polietileno",
-    "categoria": "Embalagem",
-    "estoqueMinimo": 20,
-    "endereco": "05-002-1-1",
-    "codigoBarras": "PDF02P",
-    "imagem": "",
-    "criadoEm": "2026-03-11T19:05:00.000Z",
-    "atualizadoEm": "2026-03-11T19:05:00.000Z",
-    "quantidadeBase": 0
+    "nome": "Produto teste pdf",
+    "material": "Papel",
+    "estoqueMinimo": 5,
+    "tipoEndereco": "multiplo",
+    "enderecos": [
+      "05-021-1",
+      "05-021-2"
+    ],
+    "classeABC": "B"
   }
 ]
