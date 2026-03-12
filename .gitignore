@@ -1,6 +1,7 @@
-node_modules
+node_modules/
 .env
 npm-debug.log
-.DS_Store
-uploads/temporarios/*
-backups/*.zip
+uploads/imagens/*
+uploads/documentos/*
+uploads/importacao/*
+!.gitkeep

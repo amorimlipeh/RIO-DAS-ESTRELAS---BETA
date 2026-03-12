@@ -1,30 +1,25 @@
-# SISTEMA DE ESTOQUE ✨ RIO DAS ESTRELAS 🌟
+# Projeto Rio das Estrelas - V11 Final
 
-Sistema web de estoque com endereçamento logístico integrado, pedidos, separação, inventário, alertas e notificações.
+Sistema de estoque com funções WMS, cadastro único de produtos, mapa WMS, importação simples, logs, pedidos e suporte a imagens.
 
-## Como rodar localmente
+## Rodar localmente
 
 ```bash
 npm install
 npm start
 ```
 
-Acesse: `http://localhost:3000`
-
-## Credenciais iniciais
-
-- Usuário: `admin`
-- Senha: `123456`
+Acesse `http://localhost:3000`.
 
 ## Estrutura principal
 
-- `public/` interface web
-- `routes/` rotas da API
-- `modules/` regras de negócio
+- `server.js` API e frontend
 - `data/` banco JSON
-- `uploads/` arquivos enviados
-- `backups/` backups gerados pelo sistema
+- `uploads/` imagens e arquivos importados
+- `public/` interface web responsiva
 
-## Observação
+## Observações
 
-O projeto já nasce com modo manual, automático e misto para várias operações, configurado em `data/configuracoes.json`.
+- Esta versão salva os dados em arquivos JSON.
+- O reconhecimento por imagem/código está preparado em fluxo manual assistido, sem IA externa.
+- A importação aceita CSV/TXT simples com cabeçalho como: `codigo,nome,material,quantidade,endereco`.
