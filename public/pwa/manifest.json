@@ -1,0 +1,9 @@
+{
+  "name": "Projeto Rio das Estrelas V11",
+  "short_name": "RDE V11",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#22c55e",
+  "icons": []
+}
