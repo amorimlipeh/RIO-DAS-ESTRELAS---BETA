@@ -1,4 +1,26 @@
 [
-  {"rua":"05","numero":"001","andar":"3","posicao":"1","lado":"ímpar"},
-  {"rua":"05","numero":"002","andar":"1","posicao":"1","lado":"par"}
+  {
+    "id": "END-05-001-3-1",
+    "rua": "05",
+    "numero": "001",
+    "andar": "3",
+    "posicao": "1",
+    "endereco": "05-001-3-1",
+    "lado": "ímpar",
+    "status": "ocupado",
+    "produtoCodigo": "IMA01G",
+    "quantidade": 120
+  },
+  {
+    "id": "END-05-002-1-1",
+    "rua": "05",
+    "numero": "002",
+    "andar": "1",
+    "posicao": "1",
+    "endereco": "05-002-1-1",
+    "lado": "par",
+    "status": "ocupado",
+    "produtoCodigo": "PDF02P",
+    "quantidade": 80
+  }
 ]

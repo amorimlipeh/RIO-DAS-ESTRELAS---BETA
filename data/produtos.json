@@ -4,21 +4,27 @@
     "codigo": "IMA01G",
     "nome": "Filme Stretch",
     "material": "Plástico",
-    "quantidade": 120,
+    "categoria": "Embalagem",
+    "estoqueMinimo": 10,
     "endereco": "05-001-3-1",
     "codigoBarras": "IMA01G",
     "imagem": "",
-    "criadoEm": "11/03/2026 19:00:00"
+    "criadoEm": "2026-03-11T19:00:00.000Z",
+    "atualizadoEm": "2026-03-11T19:00:00.000Z",
+    "quantidadeBase": 0
   },
   {
     "id": 2,
     "codigo": "PDF02P",
     "nome": "Saco Plástico",
     "material": "Polietileno",
-    "quantidade": 80,
+    "categoria": "Embalagem",
+    "estoqueMinimo": 20,
     "endereco": "05-002-1-1",
     "codigoBarras": "PDF02P",
     "imagem": "",
-    "criadoEm": "11/03/2026 19:05:00"
+    "criadoEm": "2026-03-11T19:05:00.000Z",
+    "atualizadoEm": "2026-03-11T19:05:00.000Z",
+    "quantidadeBase": 0
   }
 ]
