@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const itens = String(fd.get('itens') || '')
-      .split(/?
-/)
+      .split(/\r?\n/)
+      .filter(Boolean)
       .filter(Boolean)
       .map((line) => {
         const [codigo, quantidade] = line.split(',');
